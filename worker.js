@@ -28,7 +28,8 @@ export default {
 
 async function fetchFromRepository(baseUrl, path, request) {
     const targetUrl = `${baseUrl}${path}`;
-    if (!path) return new Response("",{status: 404})
+
+    if (!path || path === '/') return new Response("",{status: 404})
     return await fetch(targetUrl, {
         method: request.method,
         headers: request.headers,
