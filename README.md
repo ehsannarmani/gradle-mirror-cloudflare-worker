@@ -40,7 +40,7 @@ maven("https://en-mirror.ir/jitpack")
   - Login to your cloudflare account using: `wrangler login`
   - Update configuration in wrangler.toml:
     - Set `compatibility_date` field to current date
-    - Set id field in [account] group to your cloudflare worker account id, you can find it:
+    - Set id field in [account] group to your cloudflare worker account id, you can find it in:
       - Simply in cloudflare dashboard, click on Workers & Pages tab and on the right side you can find the account id
   - Deploy the worker using: `wrangler deploy`
 #### Now, your worker is ready to use and the mirror url is your worker url in this pattern: `https://[worker-name].[cloudflare-username].workers.dev/`
@@ -48,7 +48,7 @@ maven("https://en-mirror.ir/jitpack")
 ### Custom Domain:
 - Set up your domain in Cloudflare, configure the DNS servers on the domain, and wait until the domain becomes active
 - After your domain becomes active, click on websites tab and select your domain
-- Click on DNS tab and add new `CNAME` record, set content to your worker url: `xworker.xuser.workers.dev`
+- Click on DNS tab and add new `CNAME` record, set content to your worker domain: `[worker-name].[cloudflare-username].workers.dev`
 - Keep proxied checked
 - Click on Worker Routes tab and add route
 - If you want to mirror your root domain, enter the route like this: `https://your-domain.com/*`
