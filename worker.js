@@ -22,7 +22,7 @@ export default {
             }
         }
 
-        return new Response("Dependency Not Found", { status: 404 });
+        return new Response("Dependency Not Found.", { status: 404 });
     },
 };
 
