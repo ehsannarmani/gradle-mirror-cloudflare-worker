@@ -54,3 +54,9 @@ maven("https://en-mirror.ir/jitpack")
 - If you want to mirror your root domain, enter the route like this: `https://your-domain.com/*`
 - Select the created worker and click on save.
 #### Now your custom domain should be connected to worker, and you can use your own mirror!
+
+<hr/>
+
+> [!NOTE]
+> You can set up mirror without using cloudflare with PHP Back-End, [see](https://github.com/ehsannarmani/gradle-mirror-php).
+
