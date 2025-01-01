@@ -32,16 +32,15 @@ if ! command -v wrangler &>/dev/null; then
     executeCommand "npm install -g wrangler &>/dev/null"
 fi
 
-REPO_URL="https://github.com/${GITHUB_REPOSITORY}.git"
-REPO_DIR=$(basename "${GITHUB_REPOSITORY}")
-
 # Check if the repository is already cloned
+REPO_DIR="gradle-mirror-cloudflare-worker"
+REPO_URL="https://github.com/ehsannarmani/gradle-mirror-cloudflare-worker"
 if [ -d "$REPO_DIR" ]; then
     echo -e "${CYAN}Repository already cloned.${RESET}"
 else
     # Clone the repository (suppress output)
     echo -e "${CYAN}Cloning the repository...${RESET}"
-    git clone "$REPO_URL" &>/dev/null || {
+    git clone REPO_URL &>/dev/null || {
         echo -e "${RED}Error: Failed to clone repository.${RESET}"
         exit 1
     }
