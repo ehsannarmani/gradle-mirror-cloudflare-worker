@@ -30,4 +30,4 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
           chmod +x ./setup.sh
-          ./setup.s
+          ./setup.sh
