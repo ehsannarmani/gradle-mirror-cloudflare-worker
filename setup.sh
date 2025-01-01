@@ -40,7 +40,7 @@ if [ -d "$REPO_DIR" ]; then
 else
     # Clone the repository (suppress output)
     echo -e "${CYAN}Cloning the repository...${RESET}"
-    git clone REPO_URL &>/dev/null || {
+    git clone "$REPO_URL" &>/dev/null || {
         echo -e "${RED}Error: Failed to clone repository.${RESET}"
         exit 1
     }
