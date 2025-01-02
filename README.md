@@ -41,6 +41,12 @@ maven("https://en-mirror.ir/jitpack")
   - Update configuration in wrangler.toml:
     - Set `compatibility_date` field to current date
   - Deploy the worker using: `wrangler deploy`
+- <strong>Bash Setup</strong>:
+  - Ensure you have Node.js installed on your system
+  - Execute the bash script:
+  - `bash <(curl -fsSL https://raw.githubusercontent.com/ehsannarmani/gradle-mirror-cloudflare-worker/master/setup.sh)`
+  - Note: if you are in Windows os, you can execute the bash script like this:
+  - `bash -c "bash <(curl -fsSL https://raw.githubusercontent.com/ehsannarmani/gradle-mirror-cloudflare-worker/master/setup.sh)"`
 #### Now, your worker is ready to use and the mirror url is your worker url in this pattern: `https://[worker-name].[cloudflare-username].workers.dev/`
 
 ### Custom Domain:
