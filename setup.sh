@@ -20,9 +20,15 @@ executeCommand() {
     echo "$result"
 }
 
-# Check if Node.js and npm are installed
+# Check if Node.js is installed
 if ! command -v node &>/dev/null; then
-    echo -e "${RED}Ensure you have Node.js installed on your system.${RESET}"
+    echo -e "${RED}Node.js is not installed. Please install Node.js to proceed.${RESET}"
+    exit 1
+fi
+
+# Check if npm is installed
+if ! command -v npm &>/dev/null; then
+    echo -e "${RED}npm is not installed. Please install npm to proceed.${RESET}"
     exit 1
 fi
 
@@ -30,11 +36,20 @@ fi
 if ! command -v wrangler &>/dev/null; then
     echo -e "${YELLOW}Wrangler is not installed. Installing Wrangler...${RESET}"
     executeCommand "npm install -g wrangler &>/dev/null"
+    if [ $? -ne 0 ]; then
+        echo -e "${YELLOW}Retrying Wrangler installation with sudo...${RESET}"
+        executeCommand "sudo npm install -g wrangler &>/dev/null"
+        if [ $? -ne 0 ]; then
+            echo -e "${RED}Failed to install Wrangler.${RESET}"
+            exit 1
+        fi
+    fi
 fi
 
 # Check if the repository is already cloned
 REPO_DIR="gradle-mirror-cloudflare-worker"
 REPO_URL="https://github.com/ehsannarmani/gradle-mirror-cloudflare-worker"
+
 if [ -d "$REPO_DIR" ]; then
     echo -e "${CYAN}Repository already cloned.${RESET}"
 else
@@ -50,7 +65,7 @@ fi
 cd "$REPO_DIR" || exit
 
 # Check if Wrangler is logged in by running `wrangler whoami`
-echo -e "${CYAN}Checking if you are logged in to wrangler...${RESET}"
+echo -e "${CYAN}Checking if you are logged in to Wrangler...${RESET}"
 
 whoami_output=$(wrangler whoami 2>&1)
 
@@ -84,3 +99,7 @@ else
     echo -e "${RED}Error: Unable to extract the worker URL from the deployment output.${RESET}"
     exit 1
 fi
+
+# Cleanup: Delete the repository folder if it was cloned in this session
+cd .. || exit
+rm -rf "$REPO_DIR"
