@@ -15,9 +15,10 @@ executeCommand() {
     if [ $status -ne 0 ]; then
         echo -e "${RED}Error executing command: $command${RESET}"
         echo "$result"
-        exit 1
+        return 1
     fi
     echo "$result"
+    return 0
 }
 
 # Check if Node.js is installed
@@ -34,64 +35,63 @@ fi
 
 # Check if Wrangler is installed
 if ! command -v wrangler &>/dev/null; then
-    echo -e "${YELLOW}Wrangler is not installed. Installing Wrangler...${RESET}"
+    echo -e "${YELLOW}Wrangler is not installed. Attempting to install Wrangler...${RESET}"
     executeCommand "npm install -g wrangler &>/dev/null"
     if [ $? -ne 0 ]; then
         echo -e "${YELLOW}Retrying Wrangler installation with sudo...${RESET}"
         executeCommand "sudo npm install -g wrangler &>/dev/null"
         if [ $? -ne 0 ]; then
-            echo -e "${RED}Failed to install Wrangler.${RESET}"
+            echo -e "${RED}Failed to install Wrangler. Please install it manually.${RESET}"
             exit 1
         fi
     fi
+    echo -e "${GREEN}Wrangler installed successfully.${RESET}"
 fi
 
-# Check if the repository is already cloned
+# Repository details
 REPO_DIR="gradle-mirror-cloudflare-worker"
 REPO_URL="https://github.com/ehsannarmani/gradle-mirror-cloudflare-worker"
 
+# Check if the repository is already cloned
 if [ -d "$REPO_DIR" ]; then
     echo -e "${CYAN}Repository already cloned.${RESET}"
 else
-    # Clone the repository (suppress output)
     echo -e "${CYAN}Cloning the repository...${RESET}"
-    git clone "$REPO_URL" &>/dev/null || {
+    git clone "$REPO_URL" &>/dev/null
+    if [ $? -ne 0 ]; then
         echo -e "${RED}Error: Failed to clone repository.${RESET}"
         exit 1
-    }
+    fi
 fi
 
 # Navigate to the repository directory
-cd "$REPO_DIR" || exit
+cd "$REPO_DIR" || {
+    echo -e "${RED}Error: Failed to navigate to repository directory.${RESET}"
+    exit 1
+}
 
-# Check if Wrangler is logged in by running `wrangler whoami`
+# Check if Wrangler is logged in
 echo -e "${CYAN}Checking if you are logged in to Wrangler...${RESET}"
-
 whoami_output=$(wrangler whoami 2>&1)
-
 if [[ "$whoami_output" == *"You are not authenticated"* ]]; then
     echo -e "${CYAN}Logging into Wrangler...${RESET}"
     executeCommand "wrangler login"
-    # Clear the console after login success
     clear
     echo -e "${GREEN}Logged in successfully!${RESET}"
-    echo -e "${CYAN}Proceeding with deployment...${RESET}"
 else
     echo -e "${CYAN}You are already logged in.${RESET}"
 fi
 
-# Modify compatibility_date in wrangler.toml to yesterday's date
+# Update compatibility_date in wrangler.toml to yesterday's date
 DATE=$(date -d "yesterday" +%Y-%m-%d)
-
 sed -i "s/^compatibility_date = .*/compatibility_date = \"$DATE\"/" wrangler.toml
 
-# Deploy the Worker and capture the result
+# Deploy the Worker
 echo -e "${CYAN}Deploying the Mirror...${RESET}"
 deployResult=$(executeCommand "wrangler deploy")
 
-# Extract the worker URL from the deployment result using a more refined method
+# Extract the worker URL
 workerUrl=$(echo "$deployResult" | grep -oE 'https://[a-zA-Z0-9.-]+\.workers\.dev')
-
 if [ -n "$workerUrl" ]; then
     echo -e "${GREEN}Your Mirror has been successfully deployed!${RESET}"
     echo -e "${GREEN}Mirror URL: $workerUrl${RESET}"
@@ -100,6 +100,6 @@ else
     exit 1
 fi
 
-# Cleanup: Delete the repository folder if it was cloned in this session
+# Cleanup: Delete the repository folder if it was cloned
 cd .. || exit
 rm -rf "$REPO_DIR"
