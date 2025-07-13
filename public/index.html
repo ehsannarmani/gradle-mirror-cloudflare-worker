@@ -2,8 +2,36 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8" />
-    <title>Gradle Mirror</title>
+    <title>Gradle Mirror | عبور از تحریم‌های گریدل</title>
+
+    <meta content="دانلود سریع و بدون محدودیت دیپندنسی‌های Gradle از مخازن Google، Maven Central و JitPack با کمک Cloudflare Workers. راه‌حلی ساده برای عبور از تحریم‌ها."
+          name="description">
+    <meta content="Gradle, Mirror, تحریم, ایران, دانلود دیپندنسی, Maven, JitPack, Google, Cloudflare Workers, مخزن گریدل, en-mirror.ir"
+          name="keywords">
+    <meta content="احسان نرمانی" name="author">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <!-- Open Graph -->
+    <meta content="Gradle Mirror | عبور از تحریم‌های گریدل" property="og:title">
+    <meta content="دانلود سریع و بدون محدودیت دیپندنسی‌های Gradle با کمک Cloudflare Workers." property="og:description">
+    <meta content="https://github.com/ehsannarmani/gradle-mirror-cloudflare-worker/blob/feat/add-landing-page/assets/sample.png?raw=true"
+          property="og:image">
+    <meta content="https://en-mirror.ir" property="og:url">
+    <meta content="website" property="og:type">
+
+    <!-- Twitter Card -->
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="Gradle Mirror | عبور از تحریم‌های گریدل" name="twitter:title">
+    <meta content="دانلود سریع و بدون محدودیت دیپندنسی‌های Gradle از مخازن تحریم‌شده با کمک Cloudflare Workers."
+          name="twitter:description">
+    <meta content="https://github.com/ehsannarmani/gradle-mirror-cloudflare-worker/blob/feat/add-landing-page/assets/sample.png?raw=true"
+          name="twitter:image">
+
+
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Vazirmatn', sans-serif;
@@ -12,18 +40,20 @@
             background: #fafafa;
             color: #333;
         }
-        h1 {
+
+        h1, h3 {
             color: #005bbb;
         }
         code {
             background: #f5f5f5;
-            padding: 1em;
+            padding: .7em;
             display: block;
             border-radius: 6px;
             direction: ltr;
             white-space: pre-wrap;
             line-height: 1.6;
-            font-size: 0.9em;
+            font-size: 0.8em;
+            font-family: "Fira Code";
         }
         .container {
             max-width: 800px;
@@ -31,9 +61,42 @@
         }
         footer {
             margin-top: 3em;
-            font-size: 0.85em;
+            font-size: 0.9em;
             color: #666;
             text-align: center;
+        }
+
+        footer a {
+            color: #666;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .project-link {
+            margin-top: 0.5em;
+            font-size: 1em;
+            text-align: center;
+        }
+
+        .project-link a {
+            color: #005bbb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .project-link a:hover {
+            text-decoration: underline;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #005bbb, transparent);
+            margin: 2em 0;
         }
     </style>
 </head>
@@ -41,26 +104,21 @@
 <div class="container">
     <h1>عبور از تحریم های گریدل</h1>
     <p>
-        این سرویس برای دانلود دیپندنسی های گریدل بدون محدودیت و عبور از تحریم ها طراحی شده است.
-        <br>
-        شما می‌توانید با تغییر تنظیمات پروژه خود، به‌سادگی از این Mirror استفاده کنید.
+        این سرویس برای دانلود دیپندنسی های گریدل بدون محدودیت و عبور از تحریم ها طراحی شده است، شما می‌توانید با تغییر
+        تنظیمات پروژه خود، به‌سادگی از این Mirror استفاده کنید.
     </p>
 
     <h2>نحوه استفاده در Gradle (Kotlin DSL)</h2>
     <p>تیکه کد <code style="display: inline">maven("https://en-mirror.ir")</code> را به لیست ریپازیتوری های خود در فایل <code style="display: inline;">settings.gradle.kts</code> اضافه کنید.</p>
-    <code>
-        pluginManagement {
-            repositories {
-                maven("https://en-mirror.ir")
-            }
-        }
-        dependencyResolutionManagement {
-            repositories {
-                maven("https://en-mirror.ir")
-            }
-        }
-    </code>
-
+    <h3>نمونه:</h3>
+    <div style="text-align: center; margin: 1em 0;">
+        <img alt="نمونه کد Gradle Mirror"
+             src="https://github.com/ehsannarmani/gradle-mirror-cloudflare-worker/blob/feat/add-landing-page/assets/sample.png?raw=true"
+             style="max-width: 100%; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);"/>
+    </div>
+    <p>تمام! حالا دوباره پروژه خودتون رو سینک کنید، اگر تمامی مراحل را درست پیش رفته باشید بدون مشکل دیپندنسی ها دانلود
+        خواهند شد.</p>
+    <hr>
     <h2>محدود کردن Mirror به یک Repository خاص</h2>
     <p>
         به‌طور پیش‌فرض، همه مخازن (Google، Maven Central، JitPack) پشتیبانی می‌شوند.
@@ -69,13 +127,20 @@
     <code>
         maven("https://en-mirror.ir/jitpack")
     </code>
-
     <p>
-        این Mirror شامل مخازن <b>Google</b>، <b>Maven Central</b> و <b>JitPack</b> است.
+        این Mirror شامل مخازن <b>Google</b> ،<b>Maven Central</b> و <b>JitPack</b> است.
     </p>
 
     <footer>
-        توسعه داده شده با ❤️ توسط احسان نرمانی برای عبور از تحریم‌ها
+        توسعه داده شده با ❤️ توسط
+        <a href="https://github.com/ehsannarmani" rel="noopener noreferrer" target="_blank">احسان نرمانی</a>
+        برای عبور از تحریم‌ها
+        <div class="project-link">
+            <a href="https://github.com/ehsannarmani/gradle-mirror-cloudflare-worker" rel="noopener noreferrer"
+               target="_blank">
+                مشاهده پروژه در گیت‌هاب
+            </a>
+        </div>
     </footer>
 </div>
 </body>
