@@ -1,5 +1,5 @@
 import htmlPage from '../public/index.html';
-
+import robotsPage from '../public/robots.txt';
 
 const repositories = {
     google: "https://dl.google.com/dl/android/maven2",
@@ -18,6 +18,12 @@ export default {
             return new Response(htmlPage, {
                 headers: { "content-type": "text/html; charset=utf-8" },
             });
+        }
+        if (url.pathname === "/robots.txt") {
+            return new Response(robotsPage, {
+                    headers: {"Content-Type": "text/plain; charset=utf-8"}
+                }
+            );
         }
 
         // Check if the URL starts with a specific repository key
