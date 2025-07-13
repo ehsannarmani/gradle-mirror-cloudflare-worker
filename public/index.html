@@ -2,28 +2,81 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8" />
-    <title>Gradle Mirror - en-mirror.ir</title>
+    <title>Gradle Mirror</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
     <style>
-        body { font-family: sans-serif; direction: rtl; padding: 2em; }
-        h1 { color: #005bbb; }
-        code { background: #f5f5f5; padding: 1em; display: block; border-radius: 6px; }
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            direction: rtl;
+            padding: 2em;
+            background: #fafafa;
+            color: #333;
+        }
+        h1 {
+            color: #005bbb;
+        }
+        code {
+            background: #f5f5f5;
+            padding: 1em;
+            display: block;
+            border-radius: 6px;
+            direction: ltr;
+            white-space: pre-wrap;
+            line-height: 1.6;
+            font-size: 0.9em;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        footer {
+            margin-top: 3em;
+            font-size: 0.85em;
+            color: #666;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-<h1>Gradle Mirror توسط Cloudflare Workers</h1>
-<p>برای دانلود وابستگی‌های Gradle بدون محدودیت</p>
-<h2>نحوه استفاده</h2>
-<code>
-    pluginManagement {
-    repositories {
-    maven("https://en-mirror.ir")
-    }
-    }
-    dependencyResolutionManagement {
-    repositories {
-    maven("https://en-mirror.ir")
-    }
-    }
-</code>
+<div class="container">
+    <h1>عبور از تحریم های گریدل</h1>
+    <p>
+        این سرویس برای دانلود دیپندنسی های گریدل بدون محدودیت و عبور از تحریم ها طراحی شده است.
+        <br>
+        شما می‌توانید با تغییر تنظیمات پروژه خود، به‌سادگی از این Mirror استفاده کنید.
+    </p>
+
+    <h2>نحوه استفاده در Gradle (Kotlin DSL)</h2>
+    <p>تیکه کد <code style="display: inline">maven("https://en-mirror.ir")</code> را به لیست ریپازیتوری های خود در فایل <code style="display: inline;">settings.gradle.kts</code> اضافه کنید.</p>
+    <code>
+        pluginManagement {
+            repositories {
+                maven("https://en-mirror.ir")
+            }
+        }
+        dependencyResolutionManagement {
+            repositories {
+                maven("https://en-mirror.ir")
+            }
+        }
+    </code>
+
+    <h2>محدود کردن Mirror به یک Repository خاص</h2>
+    <p>
+        به‌طور پیش‌فرض، همه مخازن (Google، Maven Central، JitPack) پشتیبانی می‌شوند.
+        اگر می‌خواهید فقط یک مخزن خاص را Mirror کنید، از مسیر مخصوص استفاده کنید:
+    </p>
+    <code>
+        maven("https://en-mirror.ir/jitpack")
+    </code>
+
+    <p>
+        این Mirror شامل مخازن <b>Google</b>، <b>Maven Central</b> و <b>JitPack</b> است.
+    </p>
+
+    <footer>
+        توسعه داده شده با ❤️ توسط احسان نرمانی برای عبور از تحریم‌ها
+    </footer>
+</div>
 </body>
 </html>
