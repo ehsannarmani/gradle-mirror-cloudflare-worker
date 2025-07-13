@@ -1,5 +1,5 @@
 name = "gradle-mirror"  # Name of your Worker
-main = "worker.js"  # Entry point
+main = "src/worker.js"  # Entry point
 compatibility_date = "2024-12-24"
 
 [observability.logs]

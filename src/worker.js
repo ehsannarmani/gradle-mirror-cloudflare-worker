@@ -1,3 +1,6 @@
+import htmlPage from '../public/index.html';
+
+
 const repositories = {
     google: "https://dl.google.com/dl/android/maven2",
     central: "https://repo.maven.apache.org/maven2",
@@ -10,6 +13,12 @@ export default {
         // Extract the first part of the path
         const pathSegments = url.pathname.split('/').filter(Boolean); // Filter removes empty segments
         const repoKey = pathSegments[0]; // First segment of the path
+
+        if (pathSegments.length === 0) {
+            return new Response(htmlPage, {
+                headers: { "content-type": "text/html; charset=utf-8" },
+            });
+        }
 
         // Check if the URL starts with a specific repository key
         if (repositories[repoKey]) {

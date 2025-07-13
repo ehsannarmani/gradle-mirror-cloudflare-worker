@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <title>Gradle Mirror - en-mirror.ir</title>
+    <style>
+        body { font-family: sans-serif; direction: rtl; padding: 2em; }
+        h1 { color: #005bbb; }
+        code { background: #f5f5f5; padding: 1em; display: block; border-radius: 6px; }
+    </style>
+</head>
+<body>
+<h1>Gradle Mirror توسط Cloudflare Workers</h1>
+<p>برای دانلود وابستگی‌های Gradle بدون محدودیت</p>
+<h2>نحوه استفاده</h2>
+<code>
+    pluginManagement {
+    repositories {
+    maven("https://en-mirror.ir")
+    }
+    }
+    dependencyResolutionManagement {
+    repositories {
+    maven("https://en-mirror.ir")
+    }
+    }
+</code>
+</body>
+</html>
