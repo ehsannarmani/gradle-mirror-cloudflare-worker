@@ -55,7 +55,7 @@ maven("https://en-mirror.ir/jitpack")
 - Click on DNS tab and add new `CNAME` record, set content to your worker domain: `[worker-name].[cloudflare-username].workers.dev`
 - Keep proxied checked
 - Click on Worker Routes tab and add route
-- If you want to mirror your root domain, enter the route like this: `https://your-domain.com/*`
+- If you want to mirror your root domain, enter the route like this: `your-domain.com/*`
 - Select the created worker and click on save.
 #### Now your custom domain should be connected to worker, and you can use your own mirror!
 

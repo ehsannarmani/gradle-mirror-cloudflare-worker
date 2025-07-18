@@ -79,10 +79,15 @@
             text-decoration: underline;
         }
 
-        .project-link {
+        .project-link, .report-issue {
             margin-top: 0.5em;
             font-size: 1em;
             text-align: center;
+        }
+        .report-issue a {
+            color: #c53838;
+            text-decoration: none;
+            font-weight: bold;
         }
 
         .project-link a {
@@ -120,8 +125,7 @@
              style="max-width: 100%; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);"/>
     </div>
     <h3>نکته:</h3>
-    <p>اگر از groovy برای گریدل استفاده میکنید تیکه کد <code style="display: inline">maven { url =
-        "https://en-mirror.ir" }</code> را به لیست ریپازیتوری های خود در فایل <code style="display: inline;">settings.gradle</code>
+    <p>اگر از groovy برای گریدل استفاده میکنید تیکه کد <code style="display: inline">maven { url = "https://en-mirror.ir" }</code> را به لیست ریپازیتوری های خود در فایل <code style="display: inline;">settings.gradle</code>
         اضافه کنید.</p>
     <h3>نمونه:</h3>
     <div style="text-align: center; margin: 1em 0;">
@@ -148,11 +152,19 @@
         توسعه داده شده با ❤️ توسط
         <a href="https://github.com/ehsannarmani" rel="noopener noreferrer" target="_blank">احسان نرمانی</a>
         برای عبور از تحریم‌ها
-        <div class="project-link">
-            <a href="https://github.com/ehsannarmani/gradle-mirror-cloudflare-worker" rel="noopener noreferrer"
-               target="_blank">
-                مشاهده پروژه در گیت‌هاب
-            </a>
+        <div style="display: flex;justify-content: center;gap: 2rem">
+            <div class="project-link">
+                <a href="https://github.com/ehsannarmani/gradle-mirror-cloudflare-worker" rel="noopener noreferrer"
+                   target="_blank">
+                    مشاهده پروژه در گیت‌هاب
+                </a>
+            </div>
+            <div class="report-issue">
+                <a href="tg://resolve?domain=mrenk" rel="noopener noreferrer"
+                   target="_blank">
+                    گزارش مشکل
+                </a>
+            </div>
         </div>
     </footer>
 </div>
