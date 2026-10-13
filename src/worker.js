@@ -4,6 +4,7 @@ import robotsPage from '../public/robots.txt';
 const repositories = {
     google: "https://dl.google.com/dl/android/maven2",
     central: "https://repo.maven.apache.org/maven2",
+    central2: "https://repo1.maven.org/maven2",
     jitpack: "https://jitpack.io",
 };
 export default {
